@@ -1,27 +1,27 @@
-package com.jonli.regioncodekotlinapp.model
+package com.jonli.regioncodekotlinapp.repository
 
 import android.app.Application
-import android.databinding.ObservableArrayMap
-import android.databinding.ObservableMap
 import com.jonli.regioncodekotlinapp.R
 import org.xmlpull.v1.XmlPullParser
 
-class RegionCodeRepository(private val application: Application) {
+class Repository(private val application: Application) {
 
-    val items: ObservableMap<String, String> = ObservableArrayMap<String, String>()
+    private val _items: MutableMap<String, String> = mutableMapOf()
+    val items: Map<String, String>
+        get() = _items
 
     init {
         readXml()
     }
 
     companion object {
-        private var INSTANCE: RegionCodeRepository? = null
+        private var INSTANCE: Repository? = null
 
-        fun getInstance(application: Application): RegionCodeRepository {
+        fun getInstance(application: Application): Repository {
             return if (INSTANCE == null) {
-                RegionCodeRepository(application)
+                Repository(application)
             } else {
-                INSTANCE as RegionCodeRepository
+                INSTANCE as Repository
             }
         }
     }
@@ -36,7 +36,7 @@ class RegionCodeRepository(private val application: Application) {
                         var code = parser.getAttributeValue(0)
                         val value = parser.nextText()
                         if (code.length == 1) code = String.format("0%s", code)
-                        items[code] = value
+                        _items[code] = value
                     }
                 }
             }

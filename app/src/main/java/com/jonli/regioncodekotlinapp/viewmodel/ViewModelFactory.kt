@@ -1,21 +1,23 @@
 package com.jonli.regioncodekotlinapp.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import com.jonli.regioncodekotlinapp.model.RegionCodeRepository
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.jonli.regioncodekotlinapp.code.CodeViewModel
+import com.jonli.regioncodekotlinapp.repository.Repository
+import com.jonli.regioncodekotlinapp.region.RegionViewModel
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory private constructor(
         private val application: Application,
-        private val repository: RegionCodeRepository
+        private val repository: Repository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         with(modelClass) {
             when {
                 isAssignableFrom(CodeViewModel::class.java) ->
-                    CodeViewModel(application, repository)
+                    CodeViewModel(application)
                 isAssignableFrom(RegionViewModel::class.java) ->
                     RegionViewModel(application, repository)
                 else ->
@@ -27,7 +29,7 @@ class ViewModelFactory private constructor(
     companion object {
         private var INSTANCE: ViewModelFactory? = null
 
-        fun getInstance(application: Application, repository: RegionCodeRepository): ViewModelFactory {
+        fun getInstance(application: Application, repository: Repository): ViewModelFactory {
             return if (INSTANCE == null) {
                 ViewModelFactory(application, repository)
             } else {

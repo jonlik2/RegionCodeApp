@@ -1,10 +1,10 @@
 package com.jonli.regioncodekotlinapp.util
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
-import com.jonli.regioncodekotlinapp.model.RegionCodeRepository
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
+import com.jonli.regioncodekotlinapp.repository.Repository
 import com.jonli.regioncodekotlinapp.viewmodel.ViewModelFactory
 
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-    ViewModelProviders.of(this, ViewModelFactory.getInstance(application, RegionCodeRepository.getInstance(application))).get(viewModelClass)
+    ViewModelProviders.of(this, ViewModelFactory.getInstance(application, Repository.getInstance(application))).get(viewModelClass)

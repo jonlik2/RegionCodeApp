@@ -1,11 +1,11 @@
-package com.jonli.regioncodekotlinapp.viewmodel
+package com.jonli.regioncodekotlinapp.region
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.databinding.ObservableField
-import com.jonli.regioncodekotlinapp.model.RegionCodeRepository
+import androidx.lifecycle.AndroidViewModel
+import androidx.databinding.ObservableField
+import com.jonli.regioncodekotlinapp.repository.Repository
 
-class RegionViewModel(application: Application, private val repository: RegionCodeRepository) : AndroidViewModel(application) {
+class RegionViewModel(application: Application, private val repository: Repository) : AndroidViewModel(application) {
 
     var region = ObservableField<String>()
 

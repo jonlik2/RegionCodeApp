@@ -1,10 +1,10 @@
 package com.jonli.regioncodekotlinapp.util
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import com.jonli.regioncodekotlinapp.fragments.CodeFragment
-import com.jonli.regioncodekotlinapp.fragments.RegionFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import com.jonli.regioncodekotlinapp.code.CodeFragment
+import com.jonli.regioncodekotlinapp.region.RegionFragment
 
 class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

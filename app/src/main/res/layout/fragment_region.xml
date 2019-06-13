@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.jonli.regioncodekotlinapp.viewmodel.RegionViewModel"/>
+            type="com.jonli.regioncodekotlinapp.region.RegionViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.RegionFragment">
+        tools:context=".region.RegionFragment">
 
         <AutoCompleteTextView
             android:id="@+id/auto_text_region"
@@ -44,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
 

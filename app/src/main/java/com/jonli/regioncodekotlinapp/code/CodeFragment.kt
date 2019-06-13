@@ -1,26 +1,22 @@
-package com.jonli.regioncodekotlinapp.fragments
+package com.jonli.regioncodekotlinapp.code
 
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jonli.regioncodekotlinapp.viewmodel.CodeViewModel
+import androidx.lifecycle.ViewModelProviders
 import com.jonli.regioncodekotlinapp.MainActivity
 import com.jonli.regioncodekotlinapp.R
 import com.jonli.regioncodekotlinapp.databinding.FragmentCodeBinding
 import kotlinx.android.synthetic.main.fragment_code.*
 
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class CodeFragment : Fragment() {
 
-    private lateinit var model: CodeViewModel
+    private lateinit var codeViewModel: CodeViewModel
+    private lateinit var viewModelFactory: CodeViewModelFactory
 
     private lateinit var binding: FragmentCodeBinding
 
@@ -28,12 +24,16 @@ class CodeFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_code, container, false)
-        val view: View = binding.root
 
-        model = (activity as MainActivity).createCodeViewModel()
-        binding.viewModel = model
+        viewModelFactory = CodeViewModelFactory(activity!!.application)
+        codeViewModel = ViewModelProviders.of(this, viewModelFactory).get(CodeViewModel::class.java)
 
-        return view
+        binding.viewModel = codeViewModel
+        binding.lifecycleOwner = this
+
+
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
