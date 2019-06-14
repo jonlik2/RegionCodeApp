@@ -1,6 +1,7 @@
 package com.jonli.regioncodekotlinapp.code
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,20 +11,18 @@ class CodeViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = Repository.getInstance(application)
 
-    private val _code = MutableLiveData<String>()
-    val code: LiveData<String>
-        get() = _code
+    var code = MutableLiveData<String>()
 
     private val _region = MutableLiveData<String>()
     val region: LiveData<String>
         get() = _region
 
-    init {
-        val regionString = if (_code.value?.length == 1) {
-            val codeString = "0${_code.value}"
+    fun updateRegion(code: String) {
+        val regionString = if (code.length == 1) {
+            val codeString = "0$code"
             repository.items[codeString]
         } else {
-            repository.items[_code.value]
+            repository.items[code]
         }
 
         if (regionString == "null") _region.value = ""

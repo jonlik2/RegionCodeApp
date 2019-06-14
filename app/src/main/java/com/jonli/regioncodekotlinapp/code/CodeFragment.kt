@@ -3,12 +3,13 @@ package com.jonli.regioncodekotlinapp.code
 
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.jonli.regioncodekotlinapp.MainActivity
 import com.jonli.regioncodekotlinapp.R
 import com.jonli.regioncodekotlinapp.databinding.FragmentCodeBinding
 import kotlinx.android.synthetic.main.fragment_code.*
@@ -31,7 +32,13 @@ class CodeFragment : Fragment() {
         binding.viewModel = codeViewModel
         binding.lifecycleOwner = this
 
+        codeViewModel.code.observe(this, Observer {code ->
+            code?.let {
+                codeViewModel.updateRegion(it)
+            }
+        })
 
+        Log.d("TTT", "fragment create view")
 
         return binding.root
     }

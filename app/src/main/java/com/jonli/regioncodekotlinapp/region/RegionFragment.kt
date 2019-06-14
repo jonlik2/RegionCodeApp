@@ -30,8 +30,7 @@ class RegionFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_region, container, false)
         val view: View = binding.root
 
-        model = (activity as MainActivity).createRegionViewModel()
-        binding.viewModel = model
+
 
         return view
     }
