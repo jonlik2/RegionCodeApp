@@ -38,8 +38,6 @@ class CodeFragment : Fragment() {
             }
         })
 
-        Log.d("TTT", "fragment create view")
-
         return binding.root
     }
 

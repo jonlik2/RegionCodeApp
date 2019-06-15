@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.jonli.regioncodekotlinapp.MainActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.jonli.regioncodekotlinapp.R
 import com.jonli.regioncodekotlinapp.databinding.FragmentRegionBinding
 import kotlinx.android.synthetic.main.fragment_region.*
@@ -20,7 +21,8 @@ import kotlinx.android.synthetic.main.fragment_region.*
  */
 class RegionFragment : Fragment() {
 
-    private lateinit var model: RegionViewModel
+    private lateinit var regionViewModel: RegionViewModel
+    private lateinit var viewModelFactory: RegionViewModelFactory
 
     private lateinit var binding: FragmentRegionBinding
 
@@ -28,17 +30,26 @@ class RegionFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_region, container, false)
-        val view: View = binding.root
 
+        viewModelFactory = RegionViewModelFactory(activity!!.application)
+        regionViewModel = ViewModelProviders.of(this, viewModelFactory).get(RegionViewModel::class.java)
 
+        binding.viewModel = regionViewModel
+        binding.lifecycleOwner = this
 
-        return view
+        regionViewModel.region.observe(this, Observer {region ->
+            region?.let {
+                regionViewModel.updateCode(it)
+            }
+        })
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, model.list)
+        val adapter = ArrayAdapter<String>(context!!, android.R.layout.simple_dropdown_item_1line, regionViewModel.list)
         auto_text_region.setAdapter(adapter)
 
         auto_text_region.setOnClickListener { auto_text_region.setText("") }

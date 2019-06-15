@@ -29,21 +29,4 @@ class CodeViewModel(application: Application) : AndroidViewModel(application) {
         else _region.value = regionString
     }
 
-    /*var region: ObservableField<String> = object : ObservableField<String>(_code) {
-        override fun get(): String? {
-            val codeEdit: String
-            val result: String
-
-            if (_code.get().toString().length == 1) {
-                codeEdit = String.format("0%s", _code.get().toString())
-                result = repository.items[codeEdit].toString()
-            } else {
-                result = repository.items[_code.get()].toString()
-            }
-
-            return if (result == "null") ""
-            else result
-        }
-    }*/
-
 }
