@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
-    app:startDestination="@id/codeFragment">
-
+    app:startDestination="@id/mainFragment">
     <fragment
-        android:id="@+id/codeFragment"
-        android:name="com.jonli.regioncodekotlinapp.code.CodeFragment"
-        android:label="CodeFragment" />
-    <fragment
-        android:id="@+id/regionFragment"
-        android:name="com.jonli.regioncodekotlinapp.region.RegionFragment"
-        android:label="RegionFragment" />
+        android:id="@+id/mainFragment"
+        android:name="com.jonli.regioncodekotlinapp.MainFragment"
+        android:label="MainFragment" />
 </navigation>
